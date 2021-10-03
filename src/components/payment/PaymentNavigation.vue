@@ -29,15 +29,15 @@ export default {
     return {
       steps: [
         {
-          routeName: 'delivery',
+          routeName: 'CartDelivery',
           text: 'Delivery'
         },
         {
-          routeName: 'payment',
+          routeName: 'CartPayment',
           text: 'Payment'
         },
         {
-          routeName: 'finish',
+          routeName: 'CartFinish',
           text: 'Finish'
         }
       ]

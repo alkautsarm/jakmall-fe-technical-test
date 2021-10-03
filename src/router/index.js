@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
@@ -8,6 +9,21 @@ const routes = [
   {
     path: '/',
     name: 'Home',
+    component: Home
+  },
+  {
+    path: '/cart/delivery',
+    name: 'CartDelivery',
+    component: Home
+  },
+  {
+    path: '/cart/payment',
+    name: 'CartPayment',
+    component: Home
+  },
+  {
+    path: '/cart/finish',
+    name: 'CartFinish',
     component: Home
   }
 ]
