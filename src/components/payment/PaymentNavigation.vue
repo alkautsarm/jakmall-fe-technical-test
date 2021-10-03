@@ -1,10 +1,10 @@
 <template>
   <div class="paymentNav">
-    <div class="paymentNav_steps">
-      <div class="paymentNav_item" v-for="(item, idx) in steps" :key="idx">
+    <div class="paymentNav__steps">
+      <div class="paymentNav__item" v-for="(item, idx) in steps" :key="idx">
         <div
-          class="paymentNav_num"
-          :class="`paymentNav_num--${item.routeName === $route.name ? 'active': 'unactive'}`"
+          class="paymentNav__num"
+          :class="`paymentNav__num--${item.routeName === $route.name ? 'active': 'unactive'}`"
         >
           <span>{{ idx + 1 }}</span>
         </div>
@@ -12,7 +12,7 @@
           <span>{{ item.text }}</span>
         </div>
         <img
-          class="paymentNav_arrow"
+          class="paymentNav__arrow"
           v-if="idx !== (steps.length - 1)"
           src="@/assets/icons/keyboard_arrow_right.svg"
           alt="Payment steps arrow"
@@ -54,7 +54,7 @@ export default {
   justify-content: center
   margin-bottom: -35px
 
-.paymentNav_steps
+.paymentNav__steps
   display: flex
   justify-content: center
   font-weight: 500
@@ -63,25 +63,25 @@ export default {
   padding: 1.25rem 2rem
   border-radius: 35px
 
-.paymentNav_item
+.paymentNav__item
   display: flex
   align-items: center
 
-.paymentNav_item:not(:last-child)
+.paymentNav__item:not(:last-child)
   margin-right: 1rem
 
-.paymentNav_num
+.paymentNav__num
   padding: 0.2rem 0.5rem
   border-radius: 50%
   margin-right: 0.5rem
 
-.paymentNav_num--active
+.paymentNav__num--active
   color: color-white
   background-color: color-brand
 
-.paymentNav_num--unactive
+.paymentNav__num--unactive
   background-color: rgba(color-brand, 0.2)
 
-.paymentNav_arrow
+.paymentNav__arrow
   margin-left: 1.25rem
 </style>

@@ -1,6 +1,7 @@
 // Form & input components
 
 .form__inputGroup
+  position: relative
   border: 1px solid color-secondary-stroke
   padding: 1.125rem 1rem
 
@@ -14,6 +15,7 @@
   background: transparent;
   border: none;
   width: 100%
+  font-family: font-default
 
 /* Chrome, Firefox, Opera, Safari 10.1+ */
 .form__input::placeholder 
@@ -22,3 +24,7 @@
 
 .form__input:focus
   outline: none !important;
+
+.form__textarea
+  resize: none
+  font-family: font-default
