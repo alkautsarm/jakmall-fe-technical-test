@@ -2,8 +2,45 @@
 This file contains base styling
 */
 
+html
+  box-sizing: border-box
+  font-size: font-default-size
+  background-color: color-background
+
+*,
+*::before,
+*::after
+  box-sizing: inherit
+  margin: 0
+
 body
   font-family: font-default
+  color: color-primary-text
 
-h1, h2, h3, h4, h5, h6
+.heading
   font-family: font-title
+  color: color-brand
+
+@media screen and (min-width: breakpoints-desktop-large)
+  body
+    padding: 3.25rem 3rem
+
+@media screen and (max-width: breakpoints-desktop-large)
+  body
+    padding: 3rem 2.75rem
+
+@media screen and (max-width: breakpoints-desktop)
+  body
+    padding: 2.75rem 2.5rem
+
+@media screen and (max-width: breakpoints-tablet)
+  body
+    padding: 2.5rem 2.25rem
+
+@media screen and (max-width: breakpoints-mobile-large)
+  body
+    padding: 2.25rem 2rem
+
+@media screen and (max-width: breakpoints-mobile)
+  body
+    padding: 1.75rem 1.5rem
