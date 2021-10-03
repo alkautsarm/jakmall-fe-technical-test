@@ -1,0 +1,24 @@
+// Form & input components
+
+.form__inputGroup
+  border: 1px solid color-secondary-stroke
+  padding: 1.125rem 1rem
+
+.form__inputGroup--success
+  border: 1px solid color-success
+
+.form__inputGroup--wrong
+  border: 1px solid color-brand
+
+.form__input
+  background: transparent;
+  border: none;
+  width: 100%
+
+/* Chrome, Firefox, Opera, Safari 10.1+ */
+.form__input::placeholder 
+  color: color-primary-text
+  opacity: 0.4 /* Firefox */
+
+.form__input:focus
+  outline: none !important;

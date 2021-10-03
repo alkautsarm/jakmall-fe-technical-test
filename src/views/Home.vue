@@ -11,6 +11,13 @@
 
       Vivamus ut porttitor orci. Ut consectetur malesuada nibh, nec pharetra lectus scelerisque et. Nunc non tincidunt nisl. Vivamus vehicula justo nec quam gravida mollis. Etiam non erat luctus, imperdiet erat nec, facilisis nisl. Duis pretium eu quam et molestie. Sed molestie auctor volutpat. Nam euismod quam metus, blandit vulputate lorem lacinia eget. Aenean ut egestas nisl.
     </p>
+    <button class="btn btn--primary">Continue to Payment</button>
+
+    <form action="" class="form">
+      <div class="form__inputGroup">
+        <input type="text" placeholder="Name" class="form__input">
+      </div>
+    </form>
   </div>
 </template>
 
