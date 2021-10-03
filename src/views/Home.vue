@@ -1,5 +1,6 @@
 <template>
   <div>
+    <payment-navigation></payment-navigation>
     <h1 class="heading">Hello World</h1>
     <h2 class="heading">Hello World</h2>
     <h3 class="heading">Hello World</h3>
@@ -22,7 +23,12 @@
 </template>
 
 <script>
+import PaymentNavigation from '../components/payment/PaymentNavigation.vue'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    PaymentNavigation
+  }
 }
 </script>
