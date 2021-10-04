@@ -23,14 +23,14 @@
           class="paymentSummary__detailPrice"
         >
           <span class="paymentSummary__priceText">{{ detail.text }}</span>
-          <span class="paymentSummary__priceNum">{{ detail.price }}</span>
+          <span class="paymentSummary__priceNum">{{ changePriceFormat(detail.price) }}</span>
         </div>
       </div>
 
       <!-- Total price -->
       <div class="paymentSummary__totalPrice">
         <h2 class="heading">Total</h2>
-        <h2 class="heading">{{ totalPrice }}</h2>
+        <h2 class="heading">{{ changePriceFormat(totalPrice) }}</h2>
       </div>
 
       <!-- Continue to Payment button -->
@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import formatPrice from '@/utils/priceFormatting.js'
+
 export default {
   name: 'PaymentSummary',
   data () {
@@ -66,6 +68,11 @@ export default {
       })
 
       return total
+    }
+  },
+  methods: {
+    changePriceFormat (price) {
+      return formatPrice(price.toString())
     }
   }
 }
