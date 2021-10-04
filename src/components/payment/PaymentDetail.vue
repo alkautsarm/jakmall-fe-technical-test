@@ -5,8 +5,31 @@
       <div class="paymentDetail__heading--stroked">
         <h1 class="heading">Delivery Details</h1>
       </div>
-      <div class="paymentDetail__dropshipping">
-        <span>Send as dropshipper</span>
+      <div>
+        <div>
+          <input
+            v-model="form.dropshippingStatus"
+            type="checkbox"
+            class="form__inputCheckbox"
+            id="dropshippingStatus"
+          >
+        </div>
+        <label class="paymentDetail__dropshippingLabel" for="dropshippingStatus">
+          <div
+            class="form__inputGroupCheckbox"
+            :class="form.dropshippingStatus ?
+              'form__inputGroupCheckbox--checked' :
+              'form__inputGroupCheckbox--unchecked'
+            "
+          >
+            <img
+              v-if="form.dropshippingStatus"
+              src="@/assets/icons/success.svg"
+              alt="Checked box icon"
+            >
+          </div>
+          <span class="paymentDetail__dropshippingText">Send as dropshipper</span>
+        </label>
       </div>
     </div>
 
@@ -14,27 +37,51 @@
     <div class="paymentDetail__form">
       <!-- Email input -->
       <div class="form__inputGroup paymentDetail__input--left">
-        <input type="email" placeholder="Email" class="form__input">
+        <input
+          v-model="form.email"
+          type="email"
+          placeholder="Email"
+          class="form__input"
+        >
       </div>
 
       <!-- Dropshipper name input -->
       <div class="form__inputGroup">
-        <input type="text" placeholder="Dropshipper name" class="form__input">
+        <input
+          v-model="form.dropshipperName"
+          type="text"
+          placeholder="Dropshipper name"
+          class="form__input"
+        >
       </div>
 
       <!-- Phone number input -->
       <div class="form__inputGroup paymentDetail__input--left">
-        <input type="text" placeholder="Phone number" class="form__input">
+        <input
+          v-model="form.phoneNumber"
+          type="text"
+          placeholder="Phone number"
+          class="form__input"
+        >
       </div>
 
       <!-- Dropshipper phone number input -->
       <div class="form__inputGroup">
-        <input type="text" placeholder="Dropshipper phone number" class="form__input">
+        <input
+          v-model="form.dropshipperPhoneNumber"
+          type="text"
+          placeholder="Dropshipper phone number"
+          class="form__input"
+        >
       </div>
 
       <!-- Delivery address input -->
       <div class="form__inputGroup paymentDetail__input--left">
-        <textarea placeholder="Delivery Address" class="form__input form__textarea"></textarea>
+        <textarea
+          v-model="form.deliveryAddress"
+          placeholder="Delivery Address"
+          class="form__input form__textarea"
+        ></textarea>
       </div>
     </div>
   </div>
@@ -42,7 +89,19 @@
 
 <script>
 export default {
-  name: 'PaymentDetail'
+  name: 'PaymentDetail',
+  data () {
+    return {
+      form: {
+        dropshippingStatus: false,
+        email: '',
+        dropshipperName: '',
+        phoneNumber: '',
+        dropshipperPhoneNumber: '',
+        deliveryAddress: ''
+      }
+    }
+  }
 }
 </script>
 
@@ -55,6 +114,14 @@ export default {
 
 .paymentDetail__heading--stroked
   box-shadow: 0px -10px 0px color-primary-stroke inset
+
+.paymentDetail__dropshippingLabel
+  display: flex
+  align-items: center
+  cursor: pointer
+
+.paymentDetail__dropshippingText
+  margin-left: 0.5rem
 
 .paymentDetail__form
   display: grid
