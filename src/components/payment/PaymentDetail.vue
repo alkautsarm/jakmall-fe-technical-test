@@ -36,7 +36,11 @@
     <!-- Payment detail form -->
     <div class="paymentDetail__form">
       <!-- Email input -->
-      <div class="form__inputGroup paymentDetail__input--left">
+      <div
+        class="form__inputGroup paymentDetail__input--left"
+        :class="form.email ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
+      >
+        <label v-if="form.email" class="form__inputLabel">Email</label>
         <input
           v-model="form.email"
           type="email"
@@ -46,7 +50,11 @@
       </div>
 
       <!-- Dropshipper name input -->
-      <div class="form__inputGroup">
+      <div
+        class="form__inputGroup"
+        :class="form.dropshipperName ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
+      >
+        <label v-if="form.dropshipperName" class="form__inputLabel">Dropshipper name</label>
         <input
           v-model="form.dropshipperName"
           type="text"
@@ -56,7 +64,11 @@
       </div>
 
       <!-- Phone number input -->
-      <div class="form__inputGroup paymentDetail__input--left">
+      <div
+        class="form__inputGroup paymentDetail__input--left"
+        :class="form.phoneNumber ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
+      >
+        <label v-if="form.phoneNumber" class="form__inputLabel">Phone number</label>
         <input
           v-model="form.phoneNumber"
           type="text"
@@ -66,7 +78,11 @@
       </div>
 
       <!-- Dropshipper phone number input -->
-      <div class="form__inputGroup">
+      <div
+        class="form__inputGroup"
+        :class="form.dropshipperPhoneNumber ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
+      >
+        <label v-if="form.dropshipperPhoneNumber" class="form__inputLabel">Dropshipper phone number</label>
         <input
           v-model="form.dropshipperPhoneNumber"
           type="text"
@@ -76,10 +92,14 @@
       </div>
 
       <!-- Delivery address input -->
-      <div class="form__inputGroup paymentDetail__input--left">
+      <div
+        class="form__inputGroup paymentDetail__input--left"
+        :class="form.deliveryAddress ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
+      >
+        <label v-if="form.deliveryAddress" class="form__inputLabel">Delivery address</label>
         <textarea
           v-model="form.deliveryAddress"
-          placeholder="Delivery Address"
+          placeholder="Delivery address"
           class="form__input form__textarea"
         ></textarea>
       </div>
