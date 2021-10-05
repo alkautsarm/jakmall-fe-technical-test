@@ -91,25 +91,23 @@
         >
       </div>
 
-      <!-- Delivery address input -->
-      <div
-        class="form__inputGroup deliveryDetail__input--left"
-        :class="form.deliveryAddress ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
-      >
-        <label v-if="form.deliveryAddress" class="form__inputLabel">Delivery address</label>
-        <textarea
-          v-model="form.deliveryAddress"
-          placeholder="Delivery address"
-          class="form__input form__textarea"
-          rows="5"
-        ></textarea>
-      </div>
+      <base-textarea
+        textarea-label="Delivery address"
+        textarea-placeholder="Delivery address"
+        :textarea-model="form.deliveryAddress"
+        form-key="deliveryAddress"
+        @updateValue="changeFormValue"
+        class="deliveryDetail__input--left"
+      ></base-textarea>
     </div>
   </div>
 </template>
 
 <script>
+import BaseTextarea from '@/components/base/input/BaseTextarea.vue'
+
 export default {
+  components: { BaseTextarea },
   name: 'DeliveryDetail',
   data () {
     return {
@@ -121,6 +119,11 @@ export default {
         dropshipperPhoneNumber: '',
         deliveryAddress: ''
       }
+    }
+  },
+  methods: {
+    changeFormValue (value) {
+      this.form[value.formKey] = value.formValue
     }
   }
 }
