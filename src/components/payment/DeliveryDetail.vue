@@ -1,8 +1,8 @@
 <template>
-  <div class="paymentDetail">
-    <!-- Payment detail title -->
-    <div class="paymentDetail__title">
-      <div class="paymentDetail__heading--stroked">
+  <div class="deliveryDetail">
+    <!-- Delivery detail title -->
+    <div class="deliveryDetail__title">
+      <div class="deliveryDetail__heading--stroked">
         <h1 class="heading">Delivery Details</h1>
       </div>
       <div>
@@ -14,7 +14,7 @@
             id="dropshippingStatus"
           >
         </div>
-        <label class="paymentDetail__dropshippingLabel" for="dropshippingStatus">
+        <label class="deliveryDetail__dropshippingLabel" for="dropshippingStatus">
           <div
             class="form__inputGroupCheckbox"
             :class="form.dropshippingStatus ?
@@ -28,16 +28,16 @@
               alt="Checked box icon"
             >
           </div>
-          <span class="paymentDetail__dropshippingText">Send as dropshipper</span>
+          <span class="deliveryDetail__dropshippingText">Send as dropshipper</span>
         </label>
       </div>
     </div>
 
-    <!-- Payment detail form -->
-    <div class="paymentDetail__form">
+    <!-- Delivery detail form -->
+    <div class="deliveryDetail__form">
       <!-- Email input -->
       <div
-        class="form__inputGroup paymentDetail__input--left"
+        class="form__inputGroup deliveryDetail__input--left"
         :class="form.email ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
       >
         <label v-if="form.email" class="form__inputLabel">Email</label>
@@ -65,7 +65,7 @@
 
       <!-- Phone number input -->
       <div
-        class="form__inputGroup paymentDetail__input--left"
+        class="form__inputGroup deliveryDetail__input--left"
         :class="form.phoneNumber ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
       >
         <label v-if="form.phoneNumber" class="form__inputLabel">Phone number</label>
@@ -93,7 +93,7 @@
 
       <!-- Delivery address input -->
       <div
-        class="form__inputGroup paymentDetail__input--left"
+        class="form__inputGroup deliveryDetail__input--left"
         :class="form.deliveryAddress ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
       >
         <label v-if="form.deliveryAddress" class="form__inputLabel">Delivery address</label>
@@ -129,31 +129,31 @@ export default {
 <style lang="stylus" scoped>
 @import "~@/styles/index.styl"
 
-.paymentDetail__title
+.deliveryDetail__title
   display: flex
   justify-content: space-between
   align-items: center
   margin-bottom: 2.25rem
 
-.paymentDetail__heading--stroked
+.deliveryDetail__heading--stroked
   box-shadow: 0px -10px 0px color-primary-stroke inset
 
-.paymentDetail__dropshippingLabel
+.deliveryDetail__dropshippingLabel
   display: flex
   align-items: center
   cursor: pointer
 
-.paymentDetail__dropshippingText
+.deliveryDetail__dropshippingText
   margin-left: 0.5rem
 
-.paymentDetail__form
+.deliveryDetail__form
   display: grid
   grid-template-columns: auto auto auto
   grid-template-rows: auto auto auto
   grid-column-gap: 2rem
   grid-row-gap: 0.75rem
 
-.paymentDetail__input--left
+.deliveryDetail__input--left
   grid-column-start: 1
   grid-column-end: 3
 </style>
