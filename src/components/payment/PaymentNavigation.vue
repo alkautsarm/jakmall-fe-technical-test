@@ -4,7 +4,7 @@
       <div class="paymentNav__item" v-for="(item, idx) in steps" :key="idx">
         <div
           class="paymentNav__num"
-          :class="`paymentNav__num--${item.routeName === $route.name ? 'active': 'unactive'}`"
+          :class="`paymentNav__num--${item.activationRouteName.indexOf($route.name) !== -1 ? 'active': 'unactive'}`"
         >
           <span>{{ idx + 1 }}</span>
         </div>
@@ -29,15 +29,15 @@ export default {
     return {
       steps: [
         {
-          routeName: 'CartDelivery',
+          activationRouteName: ['CartDelivery', 'CartPayment', 'CartFinish'],
           text: 'Delivery'
         },
         {
-          routeName: 'CartPayment',
+          activationRouteName: ['CartPayment', 'CartFinish'],
           text: 'Payment'
         },
         {
-          routeName: 'CartFinish',
+          activationRouteName: ['CartFinish'],
           text: 'Finish'
         }
       ]
