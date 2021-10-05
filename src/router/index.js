@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../views/Home.vue'
-import CartDelivery from '../views/cart/CartDelivery.vue'
-import CartPayment from '../views/cart/CartPayment.vue'
+import Home from '@/views/Home.vue'
+import CartDelivery from '@/views/cart/CartDelivery.vue'
+import CartPayment from '@/views/cart/CartPayment.vue'
+import CartFinish from '@/views/cart/CartFinish.vue'
 
 Vue.use(VueRouter)
 
@@ -26,7 +27,7 @@ const routes = [
   {
     path: '/cart/finish',
     name: 'CartFinish',
-    component: Home
+    component: CartFinish
   }
 ]
 
