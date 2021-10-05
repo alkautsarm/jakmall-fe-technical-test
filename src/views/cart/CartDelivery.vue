@@ -1,47 +1,26 @@
 <template>
-  <main>
-    <payment-navigation></payment-navigation>
-    <section class="section section--whiteBackground">
-      <base-back-button
-        text="Back to Cart"
-        path="/cart"
-      ></base-back-button>
-
-      <div class="mainContent">
-        <payment-detail class="mainContent__detail"></payment-detail>
-
-        <payment-summary></payment-summary>
-      </div>
-    </section>
-  </main>
+  <cart-layout backButtonText="Back to Cart" backButtonPath="/cart">
+    <template v-slot:left>
+      <payment-detail class="mainContent__detail"></payment-detail>
+    </template>
+    <template v-slot:right>
+      <payment-summary></payment-summary>
+    </template>
+  </cart-layout>
 </template>
 
 <script>
-import BaseBackButton from '../../components/BaseBackButton.vue'
-import PaymentDetail from '../../components/payment/PaymentDetail.vue'
-import PaymentNavigation from '../../components/payment/PaymentNavigation.vue'
-import PaymentSummary from '../../components/payment/PaymentSummary.vue'
+import CartLayout from '@/layouts/CartLayout.vue'
+import PaymentDetail from '@/components/payment/PaymentDetail.vue'
+import PaymentSummary from '@/components/payment/PaymentSummary.vue'
 
 export default {
   components: {
-    BaseBackButton,
-    PaymentNavigation,
+    CartLayout,
     PaymentSummary,
     PaymentDetail
   }
 }
 </script>
 
-<style lang="stylus" scoped>
-@import "~@/styles/index.styl"
-
-.mainContent
-  margin-top: 1.5rem
-  display: grid
-  grid-template-columns: auto auto auto auto auto
-  grid-gap: 2rem
-
-.mainContent__detail
-  grid-column-start: 1
-  grid-column-end: 5
-</style>
+<style lang="stylus" scoped></style>
