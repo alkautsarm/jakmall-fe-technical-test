@@ -26,6 +26,7 @@ export default {
     BaseBackButton,
     PaymentNavigation
   },
+  name: 'CartLayout',
   props: {
     backButtonText: {
       type: String,
