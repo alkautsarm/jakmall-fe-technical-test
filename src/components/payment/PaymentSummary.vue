@@ -60,7 +60,12 @@
       </div>
 
       <!-- Continue to Payment button -->
-      <button class="btn btn--primary btn--fullWidth paymentSummary__btn">Continue to Payment</button>
+      <button
+        v-if="$route.name !== 'CartFinish'"
+        class="btn btn--primary btn--fullWidth paymentSummary__btn"
+      >
+        {{ buttonData[$route.name].text }}
+      </button>
     </div>
   </div>
 </template>
@@ -86,6 +91,14 @@ export default {
         cogs: 500000,
         dropship: 5900,
         shipment: 15000
+      },
+      buttonData: {
+        CartDelivery: {
+          text: 'Continue to Payment'
+        },
+        CartPayment: {
+          text: `Pay with ${this.paymentMethod ? this.paymentMethod : ''}`
+        }
       }
     }
   },
