@@ -94,7 +94,7 @@
 
 <script>
 import BaseTextarea from '@/components/base/input/BaseTextarea.vue'
-import BaseInput from '../base/input/BaseInput.vue'
+import BaseInput from '@/components/base/input/BaseInput.vue'
 
 export default {
   components: {
