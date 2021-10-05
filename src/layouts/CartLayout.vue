@@ -4,8 +4,8 @@
     <section class="section section--whiteBackground">
       <base-back-button
         v-if="backButtonText && backButtonPath"
-        text="Back to Cart"
-        path="/cart"
+        :text="backButtonText"
+        :path="backButtonPath"
       ></base-back-button>
 
       <div class="mainContent">
