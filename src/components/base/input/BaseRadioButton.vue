@@ -1,6 +1,6 @@
 <template>
   <div
-    @click="$emit('updateValue', radioValue)"
+    @click="changeValue"
     class="form__inputGroup form__inputGroupRadio form__inputGroupRadio--empty"
     :class="radioModel === radioValue ?
       'form__inputGroup--success form__inputGroupRadio--success' :
@@ -36,19 +36,23 @@ export default {
   props: {
     radioLabel: {
       type: String,
-      default: null
+      required: true
     },
     radioDetail: {
       type: String,
-      default: null
+      required: true
     },
     radioModel: {
       type: String,
-      default: null
+      required: true
     },
     radioValue: {
       type: String,
-      default: null
+      required: true
+    },
+    formKey: {
+      type: String,
+      required: true
     }
   },
   data () {
@@ -59,6 +63,15 @@ export default {
   watch: {
     radioModel (newValue) {
       this.model = newValue
+    }
+  },
+  methods: {
+    changeValue () {
+      const data = {
+        formValue: this.radioValue,
+        formKey: this.formKey
+      }
+      this.$emit('updateValue', data)
     }
   }
 }
