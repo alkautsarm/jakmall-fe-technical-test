@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import Home from '../views/Home.vue'
 import CartDelivery from '../views/cart/CartDelivery.vue'
+import CartPayment from '../views/cart/CartPayment.vue'
 
 Vue.use(VueRouter)
 
@@ -20,7 +21,7 @@ const routes = [
   {
     path: '/cart/payment',
     name: 'CartPayment',
-    component: Home
+    component: CartPayment
   },
   {
     path: '/cart/finish',
