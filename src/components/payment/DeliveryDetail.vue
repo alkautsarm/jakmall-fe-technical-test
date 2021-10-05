@@ -36,61 +36,50 @@
     <!-- Delivery detail form -->
     <div class="deliveryDetail__form">
       <!-- Email input -->
-      <div
-        class="form__inputGroup deliveryDetail__input--left"
-        :class="form.email ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
-      >
-        <label v-if="form.email" class="form__inputLabel">Email</label>
-        <input
-          v-model="form.email"
-          type="email"
-          placeholder="Email"
-          class="form__input"
-        >
-      </div>
+      <base-input
+        input-label="Email"
+        input-placeholder="Email"
+        :input-model="form.email"
+        input-type="email"
+        form-key="email"
+        @updateValue="changeFormValue"
+        class="deliveryDetail__input--left"
+      ></base-input>
 
       <!-- Dropshipper name input -->
-      <div
-        class="form__inputGroup deliveryDetail__input--right"
-        :class="form.dropshipperName ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
-      >
-        <label v-if="form.dropshipperName" class="form__inputLabel">Dropshipper name</label>
-        <input
-          v-model="form.dropshipperName"
-          type="text"
-          placeholder="Dropshipper name"
-          class="form__input"
-        >
-      </div>
+      <base-input
+        input-label="Dropshipper name"
+        input-placeholder="Dropshipper name"
+        :input-model="form.dropshipperName"
+        input-type="text"
+        form-key="dropshipperName"
+        @updateValue="changeFormValue"
+        class="deliveryDetail__input--right"
+      ></base-input>
 
       <!-- Phone number input -->
-      <div
-        class="form__inputGroup deliveryDetail__input--left"
-        :class="form.phoneNumber ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
-      >
-        <label v-if="form.phoneNumber" class="form__inputLabel">Phone number</label>
-        <input
-          v-model="form.phoneNumber"
-          type="text"
-          placeholder="Phone number"
-          class="form__input"
-        >
-      </div>
+      <base-input
+        input-label="Phone number"
+        input-placeholder="Phone number"
+        :input-model="form.phoneNumber"
+        input-type="text"
+        form-key="phoneNumber"
+        @updateValue="changeFormValue"
+        class="deliveryDetail__input--left"
+      ></base-input>
 
       <!-- Dropshipper phone number input -->
-      <div
-        class="form__inputGroup deliveryDetail__input--right"
-        :class="form.dropshipperPhoneNumber ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
-      >
-        <label v-if="form.dropshipperPhoneNumber" class="form__inputLabel">Dropshipper phone number</label>
-        <input
-          v-model="form.dropshipperPhoneNumber"
-          type="text"
-          placeholder="Dropshipper phone number"
-          class="form__input"
-        >
-      </div>
+      <base-input
+        input-label="Dropshipper phone number"
+        input-placeholder="Dropshipper phone number"
+        :input-model="form.dropshipperPhoneNumber"
+        input-type="text"
+        form-key="dropshipperPhoneNumber"
+        @updateValue="changeFormValue"
+        class="deliveryDetail__input--right"
+      ></base-input>
 
+      <!-- Delivery address input -->
       <base-textarea
         textarea-label="Delivery address"
         textarea-placeholder="Delivery address"
@@ -105,9 +94,13 @@
 
 <script>
 import BaseTextarea from '@/components/base/input/BaseTextarea.vue'
+import BaseInput from '../base/input/BaseInput.vue'
 
 export default {
-  components: { BaseTextarea },
+  components: {
+    BaseTextarea,
+    BaseInput
+  },
   name: 'DeliveryDetail',
   data () {
     return {
