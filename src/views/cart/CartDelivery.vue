@@ -1,7 +1,7 @@
 <template>
   <cart-layout backButtonText="Back to Cart" backButtonPath="/cart">
     <template v-slot:left>
-      <payment-detail class="mainContent__detail"></payment-detail>
+      <delivery-detail class="mainContent__detail"></delivery-detail>
     </template>
     <template v-slot:right>
       <payment-summary></payment-summary>
@@ -11,14 +11,14 @@
 
 <script>
 import CartLayout from '@/layouts/CartLayout.vue'
-import PaymentDetail from '@/components/payment/PaymentDetail.vue'
+import DeliveryDetail from '@/components/payment/DeliveryDetail.vue'
 import PaymentSummary from '@/components/payment/PaymentSummary.vue'
 
 export default {
   components: {
     CartLayout,
     PaymentSummary,
-    PaymentDetail
+    DeliveryDetail
   }
 }
 </script>

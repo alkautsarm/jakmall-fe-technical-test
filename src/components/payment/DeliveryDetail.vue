@@ -110,7 +110,7 @@
 
 <script>
 export default {
-  name: 'PaymentDetail',
+  name: 'DeliveryDetail',
   data () {
     return {
       form: {
@@ -127,6 +127,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import "~@/styles/index.styl"
+
 .paymentDetail__title
   display: flex
   justify-content: space-between
