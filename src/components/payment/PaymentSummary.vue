@@ -1,7 +1,7 @@
 <template>
   <div class="paymentSummary">
     <!-- Payment summary header -->
-    <div class="paymentSummary__header">
+    <div>
       <!-- Title -->
       <div>
         <h2 class="heading paymentSummary__title">Summary</h2>
@@ -11,6 +11,20 @@
       <div>
         <span>10 items purchased</span>
       </div>
+      <hr v-if="deliveryMethod" class="paymentSummary__stroke">
+      <!-- Delivery estimation -->
+      <div v-if="deliveryMethod" class="paymentSummary__otherDetail">
+        <span class="paymentSummary__methodName">Delivery estimation</span>
+        <br>
+        <span class="paymentSummary__detailMethod">today by {{ deliveryMethod }}</span>
+      </div>
+      <hr v-if="paymentMethod" class="paymentSummary__stroke">
+      <!-- Payment method -->
+      <div v-if="paymentMethod" class="paymentSummary__otherDetail">
+        <span class="paymentSummary__methodName">Payment method</span>
+        <br>
+        <span class="paymentSummary__detailMethod">{{ paymentMethod }}</span>
+      </div>
     </div>
 
     <!-- Payment summary footer -->
@@ -18,12 +32,24 @@
       <!-- Detail price -->
       <div>
         <div
-          v-for="detail in detailPriceList"
-          :key="detail.type"
           class="paymentSummary__detailPrice"
         >
-          <span class="paymentSummary__priceText">{{ detail.text }}</span>
-          <span class="paymentSummary__priceNum">{{ changePriceFormat(detail.price) }}</span>
+          <span class="paymentSummary__priceText">Cost of Goods</span>
+          <span class="paymentSummary__priceNum">{{ changePriceFormat(detailPrice.cogs) }}</span>
+        </div>
+
+        <div
+          class="paymentSummary__detailPrice"
+        >
+          <span class="paymentSummary__priceText">Dropshipping Fee</span>
+          <span class="paymentSummary__priceNum">{{ changePriceFormat(detailPrice.dropship) }}</span>
+        </div>
+
+        <div
+          class="paymentSummary__detailPrice"
+        >
+          <span class="paymentSummary__priceText"><b>GO-SEND</b> Shipment</span>
+          <span class="paymentSummary__priceNum">{{ changePriceFormat(detailPrice.shipment) }}</span>
         </div>
       </div>
 
@@ -44,27 +70,31 @@ import formatPrice from '@/utils/priceFormatting.js'
 
 export default {
   name: 'PaymentSummary',
+  props: {
+    deliveryMethod: {
+      type: String,
+      default: null
+    },
+    paymentMethod: {
+      type: String,
+      default: null
+    }
+  },
   data () {
     return {
-      detailPriceList: [
-        {
-          type: 'cogs',
-          text: 'Cost of Goods',
-          price: 500000
-        },
-        {
-          type: 'dropship',
-          text: 'Dropshipping Fee',
-          price: 5900
-        }
-      ]
+      detailPrice: {
+        cogs: 500000,
+        dropship: 5900,
+        shipment: 15000
+      }
     }
   },
   computed: {
     totalPrice () {
       let total = 0
-      this.detailPriceList.map((item) => {
-        total += item.price
+      const keys = Object.keys(this.detailPrice)
+      keys.map((key) => {
+        total += this.detailPrice[key]
       })
 
       return total
@@ -87,12 +117,26 @@ export default {
   display: flex
   flex-direction: column
   justify-content: space-between
-
-.paymentSummary__header
-  margin-bottom: 13rem
+  min-height: 520px
 
 .paymentSummary__title
   margin-bottom: 0.5rem
+
+.paymentSummary__stroke
+  color: color-other-stroke
+  width: 25%
+  margin-top: 1.25rem
+
+.paymentSummary__otherDetail
+  margin-top: 1.25rem
+
+.paymentSummary__methodName
+  font-weight: 500
+  font-size: 0.9rem
+
+.paymentSummary__detailMethod
+  color: color-success
+  font-weight: 500
 
 .paymentSummary__detailPrice
   display: flex

@@ -101,6 +101,7 @@
           v-model="form.deliveryAddress"
           placeholder="Delivery address"
           class="form__input form__textarea"
+          rows="5"
         ></textarea>
       </div>
     </div>
