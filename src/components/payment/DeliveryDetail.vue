@@ -51,7 +51,7 @@
 
       <!-- Dropshipper name input -->
       <div
-        class="form__inputGroup"
+        class="form__inputGroup deliveryDetail__input--right"
         :class="form.dropshipperName ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
       >
         <label v-if="form.dropshipperName" class="form__inputLabel">Dropshipper name</label>
@@ -79,7 +79,7 @@
 
       <!-- Dropshipper phone number input -->
       <div
-        class="form__inputGroup"
+        class="form__inputGroup deliveryDetail__input--right"
         :class="form.dropshipperPhoneNumber ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
       >
         <label v-if="form.dropshipperPhoneNumber" class="form__inputLabel">Dropshipper phone number</label>
@@ -148,12 +148,15 @@ export default {
 
 .deliveryDetail__form
   display: grid
-  grid-template-columns: auto auto auto
-  grid-template-rows: auto auto auto
+  grid-template-columns: 1fr 1fr 1fr 0.5fr
   grid-column-gap: 2rem
   grid-row-gap: 0.75rem
 
 .deliveryDetail__input--left
   grid-column-start: 1
   grid-column-end: 3
+
+.deliveryDetail__input--right
+  grid-column-start: 3
+  grid-column-end: 5
 </style>
