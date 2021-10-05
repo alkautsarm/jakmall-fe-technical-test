@@ -1,5 +1,6 @@
 // Form & input components
 
+// General input
 .form__inputGroup
   position: relative
   border: 1px solid color-secondary-stroke
@@ -32,11 +33,12 @@
   color: color-brand
 
 .form__input
-  background: transparent;
-  border: none;
+  background: transparent
+  border: none
   width: 100%
   font-family: font-default
 
+// Checkbox
 .form__inputGroupCheckbox
   width: 1.25rem
   height: 1.25rem
@@ -51,6 +53,36 @@
   border: 2px solid color-success
 
 .form__inputCheckbox
+  display: none
+
+// Radio button
+.form__inputGroupRadio
+  font-size: 0.8rem
+  cursor: pointer
+  display: flex
+  justify-content: space-between
+
+.form__inputGroupRadio:hover
+  opacity: 0.6
+
+.form__inputDetailRadio
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+.form__inputGroupRadio--empty
+  padding: 0.75rem 1rem
+
+.form__inputGroupRadio--success
+  background-color: rgba(color-success, 0.1)
+
+.form__inputLabelRadio
+  font-size: 0.75rem
+  opacity: 0.4
+  margin-bottom: 0.25rem
+  cursor: pointer
+
+.form__inputRadio
   display: none
 
 /* Chrome, Firefox, Opera, Safari 10.1+ */
