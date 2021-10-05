@@ -9,9 +9,13 @@
       ></base-back-button>
 
       <div class="mainContent">
-        <slot name="left" class="mainContent__detail"></slot>
+        <div class="mainContent__detail--left">
+          <slot name="left"></slot>
+        </div>
 
-        <slot name="right"></slot>
+        <div class="mainContent__detail--right">
+          <slot name="right"></slot>
+        </div>
       </div>
     </section>
   </main>
@@ -46,10 +50,14 @@ export default {
 .mainContent
   margin-top: 1.5rem
   display: grid
-  grid-template-columns: auto auto auto auto auto
+  grid-template-columns: 1fr 1fr 1fr
   grid-gap: 2rem
 
-.mainContent__detail
+.mainContent__detail--left
   grid-column-start: 1
-  grid-column-end: 5
+  grid-column-end: 3
+
+.mainContent__detail--right
+  grid-column-start: 3
+  grid-column-end: 4
 </style>

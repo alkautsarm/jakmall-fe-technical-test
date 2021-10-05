@@ -1,7 +1,7 @@
 <template>
   <cart-layout backButtonText="Back to Cart" backButtonPath="/cart">
     <template v-slot:left>
-      <delivery-detail class="mainContent__detail"></delivery-detail>
+      <delivery-detail></delivery-detail>
     </template>
     <template v-slot:right>
       <payment-summary></payment-summary>
