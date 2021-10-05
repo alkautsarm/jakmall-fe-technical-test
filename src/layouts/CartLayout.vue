@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import BaseBackButton from '@/components/BaseBackButton.vue'
+import BaseBackButton from '@/components/base/BaseBackButton.vue'
 import PaymentNavigation from '@/components/payment/PaymentNavigation.vue'
 
 export default {
