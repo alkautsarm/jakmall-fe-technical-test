@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate'
 
 import cart from './modules/cart'
 import delivery from './modules/delivery'
+import shipment from './modules/shipment'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
   },
   modules: {
     cart,
-    delivery
+    delivery,
+    shipment
   },
   plugins: [createPersistedState()]
 })

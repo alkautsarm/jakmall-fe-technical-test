@@ -8,7 +8,7 @@
     "
   >
     <div class="form__inputDetailRadio">
-      <label class="form__inputLabelRadio" :for="radioValue">
+      <label class="form__inputLabelRadio">
         {{ radioLabel }}
       </label>
       <span>{{ radioDetail }}</span>
@@ -19,7 +19,6 @@
       :value="radioValue"
       type="radio"
       class="form__inputRadio"
-      :id="radioValue"
     >
     <img
       v-if="radioModel === radioValue"
@@ -43,11 +42,11 @@ export default {
       required: true
     },
     radioModel: {
-      type: String,
+      type: Object,
       required: true
     },
     radioValue: {
-      type: String,
+      type: Object,
       required: true
     },
     formKey: {

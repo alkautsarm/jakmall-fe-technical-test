@@ -10,12 +10,12 @@
     <!-- Shipment form -->
     <div class="paymentDetail__form">
       <base-radio-button
-        v-for="(shipment, idx) in shipmentList"
+        v-for="(shipment, idx) in shipmentChoices"
         :key="idx"
         :radio-label="shipment.label"
-        :radio-detail="changePriceFormat(shipment.price)"
-        :radio-model="form.shipment"
-        :radio-value="shipment.value"
+        :radio-detail="shipment.formattedPrice"
+        :radio-model="chosenShipment"
+        :radio-value="shipment"
         form-key="shipment"
         @updateValue="changeFormValue"
       ></base-radio-button>
@@ -34,7 +34,7 @@
         radio-label="e-Wallet"
         :radio-detail="`${changePriceFormat(eWalletData.saldo)} left`"
         :radio-model="form.payment"
-        :radio-value="eWalletData.value"
+        :radio-value="eWalletData"
         form-key="payment"
         @updateValue="changeFormValue"
       ></base-radio-button>
@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
+
 import BaseRadioButton from '@/components/base/input/BaseRadioButton.vue'
 import formatPrice from '@/utils/priceFormatting.js'
 
@@ -54,41 +56,23 @@ export default {
   data () {
     return {
       form: {
-        shipment: '',
-        payment: ''
+        payment: {}
       },
-      shipmentList: [
-        {
-          label: 'GO-SEND',
-          price: 15000,
-          durationInDays: 0,
-          value: 'gosend'
-        },
-        {
-          label: 'JNE',
-          price: 9000,
-          durationInDays: 2,
-          value: 'jne'
-        },
-        {
-          label: 'Personal Courier',
-          price: 29000,
-          durationInDays: 1,
-          value: 'courier'
-        }
-      ],
       eWalletData: {
-        saldo: 1500000,
-        value: 'ewallet'
+        saldo: 1500000
       }
     }
   },
+  computed: {
+    ...mapState('shipment', ['shipmentChoices', 'chosenShipment'])
+  },
   methods: {
+    ...mapMutations('shipment', ['changeShipment']),
     changePriceFormat (price) {
       return formatPrice(price.toString())
     },
     changeFormValue (value) {
-      this.form[value.formKey] = value.formValue
+      this.changeShipment(value)
     }
   }
 }
