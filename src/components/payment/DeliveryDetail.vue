@@ -8,7 +8,7 @@
       <div>
         <div>
           <input
-            v-model="form.dropshippingStatus"
+            v-model="deliveryData.dropshippingStatus"
             type="checkbox"
             class="form__inputCheckbox"
             id="dropshippingStatus"
@@ -17,13 +17,13 @@
         <label class="deliveryDetail__dropshippingLabel" for="dropshippingStatus">
           <div
             class="form__inputGroupCheckbox"
-            :class="form.dropshippingStatus ?
+            :class="deliveryData.dropshippingStatus ?
               'form__inputGroupCheckbox--checked' :
               'form__inputGroupCheckbox--unchecked'
             "
           >
             <img
-              v-if="form.dropshippingStatus"
+              v-if="deliveryData.dropshippingStatus"
               src="@/assets/icons/success.svg"
               alt="Checked box icon"
             >
@@ -39,7 +39,7 @@
       <base-input
         input-label="Email"
         input-placeholder="Email"
-        :input-model="form.email"
+        :input-model="deliveryData.email"
         input-type="email"
         form-key="email"
         @updateValue="changeFormValue"
@@ -50,7 +50,7 @@
       <base-input
         input-label="Dropshipper name"
         input-placeholder="Dropshipper name"
-        :input-model="form.dropshipperName"
+        :input-model="deliveryData.dropshipperName"
         input-type="text"
         form-key="dropshipperName"
         @updateValue="changeFormValue"
@@ -61,7 +61,7 @@
       <base-input
         input-label="Phone number"
         input-placeholder="Phone number"
-        :input-model="form.phoneNumber"
+        :input-model="deliveryData.phoneNumber"
         input-type="text"
         form-key="phoneNumber"
         @updateValue="changeFormValue"
@@ -72,7 +72,7 @@
       <base-input
         input-label="Dropshipper phone number"
         input-placeholder="Dropshipper phone number"
-        :input-model="form.dropshipperPhoneNumber"
+        :input-model="deliveryData.dropshipperPhoneNumber"
         input-type="text"
         form-key="dropshipperPhoneNumber"
         @updateValue="changeFormValue"
@@ -83,7 +83,7 @@
       <base-textarea
         textarea-label="Delivery address"
         textarea-placeholder="Delivery address"
-        :textarea-model="form.deliveryAddress"
+        :textarea-model="deliveryData.deliveryAddress"
         form-key="deliveryAddress"
         @updateValue="changeFormValue"
         class="deliveryDetail__input--left"
@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 import BaseTextarea from '@/components/base/input/BaseTextarea.vue'
 import BaseInput from '@/components/base/input/BaseInput.vue'
 
@@ -102,21 +103,13 @@ export default {
     BaseInput
   },
   name: 'DeliveryDetail',
-  data () {
-    return {
-      form: {
-        dropshippingStatus: false,
-        email: '',
-        dropshipperName: '',
-        phoneNumber: '',
-        dropshipperPhoneNumber: '',
-        deliveryAddress: ''
-      }
-    }
+  computed: {
+    ...mapState('delivery', ['deliveryData'])
   },
   methods: {
+    ...mapMutations('delivery', ['changeDeliveryData']),
     changeFormValue (value) {
-      this.form[value.formKey] = value.formValue
+      this.changeDeliveryData(value)
     }
   }
 }

@@ -3,15 +3,6 @@ import formatPrice from '@/utils/priceFormatting.js'
 const state = () => ({
   totalItems: 10,
   totalCogs: 500000,
-  dropshippingFee: 5900,
-  deliveryData: {
-    dropshippingStatus: false,
-    email: '',
-    dropshipperName: '',
-    phoneNumber: '',
-    dropshipperPhoneNumber: '',
-    deliveryAddress: ''
-  },
   shipmentChoices: [
     {
       label: 'GO-SEND',
