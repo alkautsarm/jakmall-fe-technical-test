@@ -20,12 +20,12 @@
           {{ `${ durationInLabel } by ${ chosenShipment.label }` }}
         </span>
       </div>
-      <hr v-if="paymentMethod" class="paymentSummary__stroke">
+      <hr v-if="chosenPayment.value" class="paymentSummary__stroke">
       <!-- Payment method -->
-      <div v-if="paymentMethod" class="paymentSummary__otherDetail">
+      <div v-if="chosenPayment.value" class="paymentSummary__otherDetail">
         <span class="paymentSummary__methodName">Payment method</span>
         <br>
-        <span class="paymentSummary__detailMethod">{{ paymentMethod }}</span>
+        <span class="paymentSummary__detailMethod">{{ chosenPayment.label }}</span>
       </div>
     </div>
 
@@ -74,7 +74,8 @@
         @click="buttonData[$route.name].function()"
         :disabled="
           $route.name === 'CartDelivery'
-            ? !submitStatus : false
+            ? !submitStatus :
+            !submitStatus && !shipmentSubmitStatus && !paymentSubmitStatus
         "
       >
         {{ buttonData[$route.name].text }}
@@ -108,7 +109,7 @@ export default {
           function: this.continueToPayment
         },
         CartPayment: {
-          text: `Pay with ${this.paymentMethod ? this.paymentMethod : ''}`,
+          text: 'Pay with e-Wallet',
           function: this.pay
         }
       }
@@ -116,7 +117,8 @@ export default {
   },
   computed: {
     ...mapState('delivery', ['deliveryData', 'submitStatus']),
-    ...mapState('shipment', ['chosenShipment']),
+    ...mapState('shipment', ['chosenShipment', 'shipmentSubmitStatus']),
+    ...mapState('payment', ['chosenPayment', 'paymentSubmitStatus']),
     ...mapGetters('cart', ['formattedTotalItems', 'formattedTotalCogs']),
     ...mapGetters('delivery', ['formattedDropshippingFee']),
     ...mapGetters('shipment', ['durationInLabel']),
@@ -142,7 +144,9 @@ export default {
     continueToPayment () {
       this.$router.push({ name: 'CartPayment' })
     },
-    pay () {}
+    pay () {
+      this.$router.push({ name: 'CartFinish' })
+    }
   }
 }
 </script>

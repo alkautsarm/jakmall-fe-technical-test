@@ -255,6 +255,9 @@ export default {
   },
   watch: {
     'deliveryData.dropshippingStatus' (newValue) {
+      this.$v.deliveryData.dropshipperName.$touch()
+      this.$v.deliveryData.dropshipperPhoneNumber.$touch()
+
       if (!newValue) {
         const formKey = ['dropshipperName', 'dropshipperPhoneNumber']
 
