@@ -9,7 +9,7 @@
 
       <!-- Total item purchased -->
       <div>
-        <span>{{ totalItemsInCart }} items purchased</span>
+        <span>{{ formattedTotalItems }} items purchased</span>
       </div>
       <hr v-if="deliveryMethod" class="paymentSummary__stroke">
       <!-- Delivery estimation -->
@@ -35,7 +35,7 @@
           class="paymentSummary__detailPrice"
         >
           <span class="paymentSummary__priceText">Cost of Goods</span>
-          <span class="paymentSummary__priceNum">{{ totalCartCogs }}</span>
+          <span class="paymentSummary__priceNum">{{ formattedTotalCogs }}</span>
         </div>
 
         <div
@@ -104,7 +104,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('cart', ['totalItemsInCart', 'totalCartCogs']),
+    ...mapGetters('cart', ['formattedTotalItems', 'formattedTotalCogs']),
     totalPrice () {
       let total = 0
       const keys = Object.keys(this.detailPrice)
