@@ -252,6 +252,20 @@ export default {
 
       return errorMessage(key, payload)
     }
+  },
+  watch: {
+    'deliveryData.dropshippingStatus' (newValue) {
+      if (!newValue) {
+        const formKey = ['dropshipperName', 'dropshipperPhoneNumber']
+
+        formKey.map((item) => {
+          this.changeDeliveryData({
+            formKey: item,
+            formValue: ''
+          })
+        })
+      }
+    }
   }
 }
 </script>
