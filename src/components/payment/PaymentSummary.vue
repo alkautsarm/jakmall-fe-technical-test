@@ -39,10 +39,11 @@
         </div>
 
         <div
+          v-if="deliveryData.dropshippingStatus"
           class="paymentSummary__detailPrice"
         >
           <span class="paymentSummary__priceText">Dropshipping Fee</span>
-          <span class="paymentSummary__priceNum">{{ changePriceFormat(detailPrice.dropship) }}</span>
+          <span class="paymentSummary__priceNum">{{ formattedDropshippingFee }}</span>
         </div>
 
         <div
@@ -72,7 +73,7 @@
 
 <script>
 import formatPrice from '@/utils/priceFormatting.js'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'PaymentSummary',
@@ -105,6 +106,8 @@ export default {
   },
   computed: {
     ...mapGetters('cart', ['formattedTotalItems', 'formattedTotalCogs']),
+    ...mapGetters('delivery', ['formattedDropshippingFee']),
+    ...mapState('delivery', ['deliveryData']),
     totalPrice () {
       let total = 0
       const keys = Object.keys(this.detailPrice)

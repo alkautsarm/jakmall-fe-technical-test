@@ -32,9 +32,6 @@ const getters = {
   },
   formattedTotalCogs: state => {
     return formatPrice(state.totalCogs.toString())
-  },
-  formattedDropshippingFee: state => {
-    return formatPrice(state.dropshippingFee.toString())
   }
 }
 

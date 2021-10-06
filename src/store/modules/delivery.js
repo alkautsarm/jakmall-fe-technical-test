@@ -1,3 +1,5 @@
+import formatPrice from '@/utils/priceFormatting.js'
+
 const state = () => ({
   dropshippingFee: 5900,
   deliveryData: {
@@ -10,7 +12,11 @@ const state = () => ({
   }
 })
 
-const getters = {}
+const getters = {
+  formattedDropshippingFee: state => {
+    return formatPrice(state.dropshippingFee.toString())
+  }
+}
 
 const actions = {}
 
