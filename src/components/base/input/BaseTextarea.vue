@@ -1,18 +1,28 @@
 <template>
-  <div
-    class="form__inputGroup"
-    :class="model ? 'form__inputGroup--filled' : 'form__inputGroup--empty'"
-  >
-    <label v-if="model" class="form__inputLabel">
-      {{ textareaLabel }}
-    </label>
-    <textarea
-      v-model="model"
-      @input="changeValue"
-      :placeholder="textareaPlaceholder"
-      class="form__input form__textarea"
-      rows="5"
-    ></textarea>
+  <div>
+    <div
+      class="form__inputGroup"
+      :class="checkEmptinessAndValidity"
+    >
+      <label v-if="model" class="form__inputLabel">
+        {{ textareaLabel }}
+      </label>
+      <img
+        v-if="model"
+        :src="require(`@/assets/icons/${isInputTrue ? 'success' : 'wrong'}.svg`)"
+        alt="Input validation icon"
+        class="form__validationIcon"
+      >
+      <textarea
+        v-model="model"
+        @input="changeValue"
+        :placeholder="textareaPlaceholder"
+        class="form__input form__textarea"
+        rows="5"
+      ></textarea>
+    </div>
+
+    <slot name="errorMessage"></slot>
   </div>
 </template>
 
@@ -35,11 +45,30 @@ export default {
     formKey: {
       type: String,
       required: true
+    },
+    isInputTrue: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
     return {
       model: this.textareaModel
+    }
+  },
+  computed: {
+    checkEmptinessAndValidity () {
+      if (this.model) {
+        if (this.isInputTrue) {
+          return 'form__inputGroup--filled form__inputGroup--success'
+        }
+        return 'form__inputGroup--filled form__inputGroup--wrong'
+      }
+
+      if (this.isInputTrue) {
+        return 'form__inputGroup--empty'
+      }
+      return 'form__inputGroup--empty form__inputGroup--wrong'
     }
   },
   watch: {
