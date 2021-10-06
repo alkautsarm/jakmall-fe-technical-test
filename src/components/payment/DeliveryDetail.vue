@@ -44,7 +44,19 @@
         form-key="email"
         @updateValue="changeFormValue"
         class="deliveryDetail__input--left"
-      ></base-input>
+        :is-input-true="
+          $v.deliveryData.email.required && $v.deliveryData.email.email
+        "
+      >
+        <template v-slot:errorMessage>
+          <div class="form__error-message" v-if="!$v.deliveryData.email.required">
+            Field is required
+          </div>
+          <div class="form__error-message" v-if="!$v.deliveryData.email.email">
+            Please input a valid email
+          </div>
+        </template>
+      </base-input>
 
       <!-- Dropshipper name input -->
       <base-input
@@ -94,6 +106,9 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import { validationMixin } from 'vuelidate'
+import { required, email } from 'vuelidate/lib/validators'
+
 import BaseTextarea from '@/components/base/input/BaseTextarea.vue'
 import BaseInput from '@/components/base/input/BaseInput.vue'
 
@@ -102,14 +117,26 @@ export default {
     BaseTextarea,
     BaseInput
   },
+  mixins: [
+    validationMixin
+  ],
   name: 'DeliveryDetail',
   computed: {
     ...mapState('delivery', ['deliveryData'])
+  },
+  validations: {
+    deliveryData: {
+      email: {
+        required,
+        email
+      }
+    }
   },
   methods: {
     ...mapMutations('delivery', ['changeDeliveryData']),
     changeFormValue (value) {
       this.changeDeliveryData(value)
+      this.$v.deliveryData.email.$touch()
     }
   }
 }
