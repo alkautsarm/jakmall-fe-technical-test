@@ -18,6 +18,7 @@
         @input="changeValue"
         :type="inputType"
         :placeholder="inputPlaceholder"
+        :disabled="disabledStatus"
         class="form__input"
       >
     </div>
@@ -53,6 +54,10 @@ export default {
     isInputTrue: {
       type: Boolean,
       default: true
+    },
+    disabledStatus: {
+      type: Boolean,
+      default: false
     }
   },
   data () {

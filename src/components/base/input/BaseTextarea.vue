@@ -13,6 +13,11 @@
         alt="Input validation icon"
         class="form__validationIcon"
       >
+
+      <div class="form__charCounter">
+        <span> {{ `${120 - model.length}` }} </span>
+      </div>
+
       <textarea
         v-model="model"
         @input="changeValue"
