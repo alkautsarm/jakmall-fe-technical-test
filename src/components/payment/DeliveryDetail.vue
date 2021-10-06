@@ -238,10 +238,12 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('delivery', ['changeDeliveryData']),
+    ...mapMutations('delivery', ['changeDeliveryData', 'changeSubmitStatus']),
     changeFormValue (value) {
       this.changeDeliveryData(value)
       this.$v.deliveryData[value.formKey].$touch()
+
+      this.changeSubmitStatus(!this.$v.$invalid)
     },
     getErrorMessage (key, payload) {
       if (!payload) {

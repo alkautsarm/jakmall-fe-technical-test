@@ -9,7 +9,8 @@ const state = () => ({
     phoneNumber: '',
     dropshipperPhoneNumber: '',
     deliveryAddress: ''
-  }
+  },
+  submitStatus: false
 })
 
 const getters = {
@@ -23,6 +24,9 @@ const actions = {}
 const mutations = {
   changeDeliveryData (state, payload) {
     state.deliveryData[payload.formKey] = payload.formValue
+  },
+  changeSubmitStatus (state, payload) {
+    state.submitStatus = payload
   }
 }
 
