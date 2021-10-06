@@ -22,6 +22,7 @@
       <base-back-button
         text="Go to homepage"
         path="/cart/delivery"
+        :is-clear-local-storage="true"
       ></base-back-button>
     </div>
   </div>
