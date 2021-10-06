@@ -9,7 +9,7 @@
 
       <!-- Total item purchased -->
       <div>
-        <span>10 items purchased</span>
+        <span>{{ totalItemsInCart }} items purchased</span>
       </div>
       <hr v-if="deliveryMethod" class="paymentSummary__stroke">
       <!-- Delivery estimation -->
@@ -35,7 +35,7 @@
           class="paymentSummary__detailPrice"
         >
           <span class="paymentSummary__priceText">Cost of Goods</span>
-          <span class="paymentSummary__priceNum">{{ changePriceFormat(detailPrice.cogs) }}</span>
+          <span class="paymentSummary__priceNum">{{ totalCartCogs }}</span>
         </div>
 
         <div
@@ -72,6 +72,7 @@
 
 <script>
 import formatPrice from '@/utils/priceFormatting.js'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'PaymentSummary',
@@ -103,6 +104,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('cart', ['totalItemsInCart', 'totalCartCogs']),
     totalPrice () {
       let total = 0
       const keys = Object.keys(this.detailPrice)
