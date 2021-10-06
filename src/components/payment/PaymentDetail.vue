@@ -20,6 +20,9 @@
         @updateValue="changeFormValue"
       ></base-radio-button>
     </div>
+    <div class="form__error-message" v-if="!$v.chosenShipment.required">
+      {{ getErrorMessage('required') }}
+    </div>
 
     <!-- Payment title -->
     <div class="paymentDetail__title paymentDetail__title--payment">
@@ -44,6 +47,9 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
+import { validationMixin } from 'vuelidate'
+import { required } from 'vuelidate/lib/validators'
+import errorMessage from '@/utils/errorMessage.js'
 
 import BaseRadioButton from '@/components/base/input/BaseRadioButton.vue'
 import formatPrice from '@/utils/priceFormatting.js'
@@ -52,6 +58,9 @@ export default {
   components: {
     BaseRadioButton
   },
+  mixins: [
+    validationMixin
+  ],
   name: 'PaymentDetail',
   data () {
     return {
@@ -67,6 +76,11 @@ export default {
   computed: {
     ...mapState('shipment', ['shipmentChoices', 'chosenShipment'])
   },
+  validations: {
+    chosenShipment: {
+      required
+    }
+  },
   methods: {
     ...mapMutations('shipment', ['changeShipment']),
     changePriceFormat (price) {
@@ -74,6 +88,14 @@ export default {
     },
     changeFormValue (value) {
       this.changeShipment(value)
+      this.$v.chosenShipment.$touch()
+    },
+    getErrorMessage (key, payload) {
+      if (!payload) {
+        payload = {}
+      }
+
+      return errorMessage(key, payload)
     }
   }
 }
