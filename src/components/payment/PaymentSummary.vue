@@ -71,6 +71,11 @@
       <button
         v-if="$route.name !== 'CartFinish'"
         class="btn btn--primary btn--fullWidth paymentSummary__btn"
+        @click="buttonData[$route.name].function()"
+        :disabled="
+          $route.name === 'CartDelivery'
+            ? !submitStatus : false
+        "
       >
         {{ buttonData[$route.name].text }}
       </button>
@@ -80,7 +85,7 @@
 
 <script>
 import formatPrice from '@/utils/priceFormatting.js'
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'PaymentSummary',
@@ -99,16 +104,18 @@ export default {
       },
       buttonData: {
         CartDelivery: {
-          text: 'Continue to Payment'
+          text: 'Continue to Payment',
+          function: this.continueToPayment
         },
         CartPayment: {
-          text: `Pay with ${this.paymentMethod ? this.paymentMethod : ''}`
+          text: `Pay with ${this.paymentMethod ? this.paymentMethod : ''}`,
+          function: this.pay
         }
       }
     }
   },
   computed: {
-    ...mapState('delivery', ['deliveryData']),
+    ...mapState('delivery', ['deliveryData', 'submitStatus']),
     ...mapState('shipment', ['chosenShipment']),
     ...mapGetters('cart', ['formattedTotalItems', 'formattedTotalCogs']),
     ...mapGetters('delivery', ['formattedDropshippingFee']),
@@ -125,9 +132,17 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('delivery', ['changeDeliveryData']),
+    changeFormValue (value) {
+      this.changeDeliveryData(value)
+    },
     changePriceFormat (price) {
       return formatPrice(price.toString())
-    }
+    },
+    continueToPayment () {
+      this.$router.push({ name: 'CartPayment' })
+    },
+    pay () {}
   }
 }
 </script>
