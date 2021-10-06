@@ -45,15 +45,12 @@
         @updateValue="changeFormValue"
         class="deliveryDetail__input--left"
         :is-input-true="
-          $v.deliveryData.email.required && $v.deliveryData.email.email
+          $v.deliveryData.email.email
         "
       >
         <template v-slot:errorMessage>
-          <div class="form__error-message" v-if="!$v.deliveryData.email.required">
-            Field is required
-          </div>
           <div class="form__error-message" v-if="!$v.deliveryData.email.email">
-            Please input a valid email
+            {{ getErrorMessage('email') }}
           </div>
         </template>
       </base-input>
@@ -65,9 +62,19 @@
         :input-model="deliveryData.dropshipperName"
         input-type="text"
         form-key="dropshipperName"
+        :disabled-status="!deliveryData.dropshippingStatus"
         @updateValue="changeFormValue"
         class="deliveryDetail__input--right"
-      ></base-input>
+        :is-input-true="
+          $v.deliveryData.dropshipperName.required
+        "
+      >
+        <template v-slot:errorMessage>
+          <div class="form__error-message" v-if="!$v.deliveryData.dropshipperName.required">
+            {{ getErrorMessage('required') }}
+          </div>
+        </template>
+      </base-input>
 
       <!-- Phone number input -->
       <base-input
@@ -78,7 +85,36 @@
         form-key="phoneNumber"
         @updateValue="changeFormValue"
         class="deliveryDetail__input--left"
-      ></base-input>
+        :is-input-true="
+          $v.deliveryData.phoneNumber.minLength && $v.deliveryData.phoneNumber.maxLength && $v.deliveryData.phoneNumber.phoneNumberValidator
+        "
+      >
+        <template v-slot:errorMessage>
+          <div class="form__error-message" v-if="!$v.deliveryData.phoneNumber.minLength">
+            {{
+              getErrorMessage('minLength',{
+                label: 'Phone number',
+                length: $v.deliveryData.phoneNumber.$params.minLength.min
+              })
+            }}
+          </div>
+
+          <div class="form__error-message" v-if="!$v.deliveryData.phoneNumber.maxLength">
+            {{
+              getErrorMessage('maxLength',{
+                label: 'Phone number',
+                length: $v.deliveryData.phoneNumber.$params.maxLength.max
+              })
+            }}
+          </div>
+
+          <div class="form__error-message" v-if="!$v.deliveryData.phoneNumber.phoneNumberValidator">
+            {{
+              getErrorMessage('phoneNumberValidator')
+            }}
+          </div>
+        </template>
+      </base-input>
 
       <!-- Dropshipper phone number input -->
       <base-input
@@ -87,9 +123,39 @@
         :input-model="deliveryData.dropshipperPhoneNumber"
         input-type="text"
         form-key="dropshipperPhoneNumber"
+        :disabled-status="!deliveryData.dropshippingStatus"
         @updateValue="changeFormValue"
         class="deliveryDetail__input--right"
-      ></base-input>
+        :is-input-true="
+          $v.deliveryData.dropshipperPhoneNumber.minLength && $v.deliveryData.dropshipperPhoneNumber.maxLength && $v.deliveryData.dropshipperPhoneNumber.phoneNumberValidator
+        "
+      >
+        <template v-slot:errorMessage>
+          <div class="form__error-message" v-if="!$v.deliveryData.dropshipperPhoneNumber.minLength">
+            {{
+              getErrorMessage('minLength',{
+                label: 'Phone number',
+                length: $v.deliveryData.dropshipperPhoneNumber.$params.minLength.min
+              })
+            }}
+          </div>
+
+          <div class="form__error-message" v-if="!$v.deliveryData.dropshipperPhoneNumber.maxLength">
+            {{
+              getErrorMessage('maxLength',{
+                label: 'Phone number',
+                length: $v.deliveryData.dropshipperPhoneNumber.$params.maxLength.max
+              })
+            }}
+          </div>
+
+          <div class="form__error-message" v-if="!$v.deliveryData.dropshipperPhoneNumber.phoneNumberValidator">
+            {{
+              getErrorMessage('phoneNumberValidator')
+            }}
+          </div>
+        </template>
+      </base-input>
 
       <!-- Delivery address input -->
       <base-textarea
@@ -99,7 +165,25 @@
         form-key="deliveryAddress"
         @updateValue="changeFormValue"
         class="deliveryDetail__input--left"
-      ></base-textarea>
+        :is-input-true="
+          $v.deliveryData.deliveryAddress.required && $v.deliveryData.deliveryAddress.maxLength
+        "
+      >
+        <template v-slot:errorMessage>
+          <div class="form__error-message" v-if="!$v.deliveryData.deliveryAddress.required">
+            {{ getErrorMessage('required') }}
+          </div>
+
+          <div class="form__error-message" v-if="!$v.deliveryData.deliveryAddress.maxLength">
+            {{
+              getErrorMessage('maxLength',{
+                label: 'Delivery address',
+                length: $v.deliveryData.deliveryAddress.$params.maxLength.max
+              })
+            }}
+          </div>
+        </template>
+      </base-textarea>
     </div>
   </div>
 </template>
@@ -107,10 +191,13 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 import { validationMixin } from 'vuelidate'
-import { required, email } from 'vuelidate/lib/validators'
+import { required, email, minLength, maxLength, helpers } from 'vuelidate/lib/validators'
+import errorMessage from '@/utils/errorMessage.js'
 
 import BaseTextarea from '@/components/base/input/BaseTextarea.vue'
 import BaseInput from '@/components/base/input/BaseInput.vue'
+
+const phoneNumberValidator = helpers.regex('phoneNumberValidator', /^[0-9()+-]*$/)
 
 export default {
   components: {
@@ -127,8 +214,26 @@ export default {
   validations: {
     deliveryData: {
       email: {
-        required,
         email
+      },
+      dropshipperName: {
+        required: function () {
+          return this.deliveryData.dropshippingStatus ? this.deliveryData.dropshipperName : true
+        }
+      },
+      phoneNumber: {
+        phoneNumberValidator,
+        minLength: minLength(6),
+        maxLength: maxLength(20)
+      },
+      dropshipperPhoneNumber: {
+        phoneNumberValidator,
+        minLength: minLength(6),
+        maxLength: maxLength(20)
+      },
+      deliveryAddress: {
+        required,
+        maxLength: maxLength(120)
       }
     }
   },
@@ -136,7 +241,14 @@ export default {
     ...mapMutations('delivery', ['changeDeliveryData']),
     changeFormValue (value) {
       this.changeDeliveryData(value)
-      this.$v.deliveryData.email.$touch()
+      this.$v.deliveryData[value.formKey].$touch()
+    },
+    getErrorMessage (key, payload) {
+      if (!payload) {
+        payload = {}
+      }
+
+      return errorMessage(key, payload)
     }
   }
 }
