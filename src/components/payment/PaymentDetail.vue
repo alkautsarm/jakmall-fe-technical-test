@@ -34,13 +34,18 @@
     <!-- Payment form -->
     <div class="paymentDetail__form">
       <base-radio-button
-        radio-label="e-Wallet"
-        :radio-detail="`${changePriceFormat(eWalletData.saldo)} left`"
-        :radio-model="form.payment"
-        :radio-value="eWalletData"
+        v-for="(payment, idx) in paymentChoices"
+        :key="idx"
+        :radio-label="payment.label"
+        :radio-detail="`${payment.formattedPrice} left`"
+        :radio-model="chosenPayment"
+        :radio-value="payment"
         form-key="payment"
-        @updateValue="changeFormValue"
+        @updateValue="changeFormValuePayment"
       ></base-radio-button>
+    </div>
+    <div class="form__error-message" v-if="!$v.chosenPayment.required">
+      {{ getErrorMessage('required') }}
     </div>
   </div>
 </template>
@@ -74,21 +79,34 @@ export default {
     }
   },
   computed: {
-    ...mapState('shipment', ['shipmentChoices', 'chosenShipment'])
+    ...mapState('shipment', ['shipmentChoices', 'chosenShipment']),
+    ...mapState('payment', ['paymentChoices', 'chosenPayment'])
   },
   validations: {
     chosenShipment: {
       required
+    },
+    chosenPayment: {
+      required
     }
   },
   methods: {
-    ...mapMutations('shipment', ['changeShipment']),
+    ...mapMutations('shipment', ['changeShipment', 'changeShipmentSubmitStatus']),
+    ...mapMutations('payment', ['changePayment', 'changePaymentSubmitStatus']),
     changePriceFormat (price) {
       return formatPrice(price.toString())
     },
     changeFormValue (value) {
       this.changeShipment(value)
       this.$v.chosenShipment.$touch()
+
+      this.changeShipmentSubmitStatus(!this.$v.$invalid)
+    },
+    changeFormValuePayment (value) {
+      this.changePayment(value)
+      this.$v.chosenPayment.$touch()
+
+      this.changePaymentSubmitStatus(!this.$v.$invalid)
     },
     getErrorMessage (key, payload) {
       if (!payload) {

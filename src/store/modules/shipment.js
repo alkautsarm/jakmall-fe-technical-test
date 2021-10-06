@@ -24,7 +24,8 @@ const state = () => ({
       value: 'personal'
     }
   ],
-  chosenShipment: {}
+  chosenShipment: {},
+  shipmentSubmitStatus: false
 })
 
 const getters = {
@@ -43,6 +44,9 @@ const actions = {}
 const mutations = {
   changeShipment (state, payload) {
     state.chosenShipment = payload.formValue
+  },
+  changeShipmentSubmitStatus (state, payload) {
+    state.shipmentSubmitStatus = payload
   }
 }
 
