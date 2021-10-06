@@ -8,7 +8,7 @@
     </label>
     <textarea
       v-model="model"
-      @change="changeValue"
+      @input="changeValue"
       :placeholder="textareaPlaceholder"
       class="form__input form__textarea"
       rows="5"

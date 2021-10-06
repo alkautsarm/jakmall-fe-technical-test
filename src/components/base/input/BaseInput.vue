@@ -8,7 +8,7 @@
     </label>
     <input
       v-model="model"
-      @change="changeValue"
+      @input="changeValue"
       :type="inputType"
       :placeholder="inputPlaceholder"
       class="form__input"
