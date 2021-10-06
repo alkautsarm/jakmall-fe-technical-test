@@ -57,7 +57,6 @@ import { required } from 'vuelidate/lib/validators'
 import errorMessage from '@/utils/errorMessage.js'
 
 import BaseRadioButton from '@/components/base/input/BaseRadioButton.vue'
-import formatPrice from '@/utils/priceFormatting.js'
 
 export default {
   components: {
@@ -67,17 +66,6 @@ export default {
     validationMixin
   ],
   name: 'PaymentDetail',
-  data () {
-    return {
-      form: {
-        payment: {}
-      },
-      eWalletData: {
-        saldo: 1500000,
-        value: 'ewallet'
-      }
-    }
-  },
   computed: {
     ...mapState('shipment', ['shipmentChoices', 'chosenShipment']),
     ...mapState('payment', ['paymentChoices', 'chosenPayment'])
@@ -93,9 +81,6 @@ export default {
   methods: {
     ...mapMutations('shipment', ['changeShipment', 'changeShipmentSubmitStatus']),
     ...mapMutations('payment', ['changePayment', 'changePaymentSubmitStatus']),
-    changePriceFormat (price) {
-      return formatPrice(price.toString())
-    },
     changeFormValue (value) {
       this.changeShipment(value)
       this.$v.chosenShipment.$touch()
