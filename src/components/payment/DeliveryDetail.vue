@@ -257,6 +257,7 @@ export default {
     'deliveryData.dropshippingStatus' (newValue) {
       this.$v.deliveryData.dropshipperName.$touch()
       this.$v.deliveryData.dropshipperPhoneNumber.$touch()
+      this.changeSubmitStatus(!this.$v.$invalid)
 
       if (!newValue) {
         const formKey = ['dropshipperName', 'dropshipperPhoneNumber']

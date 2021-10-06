@@ -71,14 +71,22 @@
       <button
         v-if="$route.name !== 'CartFinish'"
         class="btn btn--primary btn--fullWidth paymentSummary__btn"
-        @click="buttonData[$route.name].function()"
+        @click="
+          $route.name === 'CartDelivery'
+            ? continueToPayment()
+            : pay()
+        "
         :disabled="
           $route.name === 'CartDelivery'
             ? !submitStatus :
             !submitStatus && !shipmentSubmitStatus && !paymentSubmitStatus
         "
       >
-        {{ buttonData[$route.name].text }}
+        {{
+          $route.name === 'CartDelivery'
+            ? 'Continue to Payment'
+            : `Pay with ${ chosenPayment.label }`
+        }}
       </button>
     </div>
   </div>
@@ -96,27 +104,9 @@ export default {
       default: null
     }
   },
-  data () {
-    return {
-      detailPrice: {
-        cogs: 500000,
-        dropship: 5900,
-        shipment: 15000
-      },
-      buttonData: {
-        CartDelivery: {
-          text: 'Continue to Payment',
-          function: this.continueToPayment
-        },
-        CartPayment: {
-          text: 'Pay with e-Wallet',
-          function: this.pay
-        }
-      }
-    }
-  },
   computed: {
-    ...mapState('delivery', ['deliveryData', 'submitStatus']),
+    ...mapState('cart', ['totalCogs']),
+    ...mapState('delivery', ['dropshippingFee', 'deliveryData', 'submitStatus']),
     ...mapState('shipment', ['chosenShipment', 'shipmentSubmitStatus']),
     ...mapState('payment', ['chosenPayment', 'paymentSubmitStatus']),
     ...mapGetters('cart', ['formattedTotalItems', 'formattedTotalCogs']),
@@ -124,11 +114,17 @@ export default {
     ...mapGetters('shipment', ['durationInLabel']),
 
     totalPrice () {
-      let total = 0
-      const keys = Object.keys(this.detailPrice)
-      keys.map((key) => {
-        total += this.detailPrice[key]
-      })
+      const cogs = this.totalCogs
+
+      const dropshippingCost = this.deliveryData.dropshippingStatus
+        ? this.dropshippingFee
+        : 0
+
+      const shipmentCost = this.chosenShipment.price
+        ? this.chosenShipment.price
+        : 0
+
+      const total = cogs + dropshippingCost + shipmentCost
 
       return total
     }
