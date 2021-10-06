@@ -6,6 +6,7 @@ import cart from './modules/cart'
 import delivery from './modules/delivery'
 import shipment from './modules/shipment'
 import payment from './modules/payment'
+import order from './modules/order'
 
 Vue.use(Vuex)
 
@@ -20,7 +21,8 @@ export default new Vuex.Store({
     cart,
     delivery,
     shipment,
-    payment
+    payment,
+    order
   },
   plugins: [createPersistedState()]
 })

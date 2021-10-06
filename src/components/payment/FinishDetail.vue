@@ -11,7 +11,7 @@
       <!-- End of payment detail -->
       <div class="finishDetail__detail">
         <span>
-          <b>Order ID: XXKYB</b>
+          <b>Order ID: {{ orderID }}</b>
         </span>
         <br>
         <span>
@@ -28,16 +28,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import BaseBackButton from '@/components/base/BaseBackButton.vue'
+
 export default {
   components: {
     BaseBackButton
   },
   name: 'FinishDetail',
-  data () {
-    return {}
-  },
-  methods: {}
+  computed: {
+    ...mapState('order', ['orderID'])
+  }
 }
 </script>
 

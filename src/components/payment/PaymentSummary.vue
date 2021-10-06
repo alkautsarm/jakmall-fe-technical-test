@@ -94,6 +94,7 @@
 
 <script>
 import formatPrice from '@/utils/priceFormatting.js'
+import orderIDGenerator from '@/utils/orderIDGenerator'
 import { mapGetters, mapState, mapMutations } from 'vuex'
 
 export default {
@@ -131,6 +132,7 @@ export default {
   },
   methods: {
     ...mapMutations('delivery', ['changeDeliveryData']),
+    ...mapMutations('order', ['changeOrderID']),
     changeFormValue (value) {
       this.changeDeliveryData(value)
     },
@@ -141,6 +143,9 @@ export default {
       this.$router.push({ name: 'CartPayment' })
     },
     pay () {
+      this.changeOrderID({
+        value: orderIDGenerator(5)
+      })
       this.$router.push({ name: 'CartFinish' })
     }
   }
