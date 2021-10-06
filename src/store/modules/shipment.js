@@ -27,7 +27,16 @@ const state = () => ({
   chosenShipment: {}
 })
 
-const getters = {}
+const getters = {
+  durationInLabel: state => {
+    const chosenShipment = state.chosenShipment
+    if (chosenShipment.value) {
+      return chosenShipment.durationInDays === 0
+        ? 'today'
+        : `${chosenShipment.durationInDays} ${chosenShipment.durationInDays === 1 ? 'day' : 'days'}`
+    } return null
+  }
+}
 
 const actions = {}
 

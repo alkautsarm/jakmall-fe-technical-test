@@ -11,12 +11,14 @@
       <div>
         <span>{{ formattedTotalItems }} items purchased</span>
       </div>
-      <hr v-if="deliveryMethod" class="paymentSummary__stroke">
+      <hr v-if="chosenShipment.value" class="paymentSummary__stroke">
       <!-- Delivery estimation -->
-      <div v-if="deliveryMethod" class="paymentSummary__otherDetail">
+      <div v-if="chosenShipment.value" class="paymentSummary__otherDetail">
         <span class="paymentSummary__methodName">Delivery estimation</span>
         <br>
-        <span class="paymentSummary__detailMethod">today by {{ deliveryMethod }}</span>
+        <span class="paymentSummary__detailMethod">
+          {{ `${ durationInLabel } by ${ chosenShipment.label }` }}
+        </span>
       </div>
       <hr v-if="paymentMethod" class="paymentSummary__stroke">
       <!-- Payment method -->
@@ -48,9 +50,14 @@
 
         <div
           class="paymentSummary__detailPrice"
+          v-if="chosenShipment.value"
         >
-          <span class="paymentSummary__priceText"><b>GO-SEND</b> Shipment</span>
-          <span class="paymentSummary__priceNum">{{ changePriceFormat(detailPrice.shipment) }}</span>
+          <span class="paymentSummary__priceText">
+            <b>{{ chosenShipment.label }}</b> Shipment
+          </span>
+          <span class="paymentSummary__priceNum">
+            {{ chosenShipment.formattedPrice }}
+          </span>
         </div>
       </div>
 
@@ -78,10 +85,6 @@ import { mapGetters, mapState } from 'vuex'
 export default {
   name: 'PaymentSummary',
   props: {
-    deliveryMethod: {
-      type: String,
-      default: null
-    },
     paymentMethod: {
       type: String,
       default: null
@@ -105,9 +108,12 @@ export default {
     }
   },
   computed: {
+    ...mapState('delivery', ['deliveryData']),
+    ...mapState('shipment', ['chosenShipment']),
     ...mapGetters('cart', ['formattedTotalItems', 'formattedTotalCogs']),
     ...mapGetters('delivery', ['formattedDropshippingFee']),
-    ...mapState('delivery', ['deliveryData']),
+    ...mapGetters('shipment', ['durationInLabel']),
+
     totalPrice () {
       let total = 0
       const keys = Object.keys(this.detailPrice)
