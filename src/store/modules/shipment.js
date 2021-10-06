@@ -6,19 +6,22 @@ const state = () => ({
       label: 'GO-SEND',
       price: 15000,
       formattedPrice: formatPrice('15000'),
-      durationInDays: 0
+      durationInDays: 0,
+      value: 'gosend'
     },
     {
       label: 'JNE',
       price: 9000,
       formattedPrice: formatPrice('9000'),
-      durationInDays: 2
+      durationInDays: 2,
+      value: 'jne'
     },
     {
       label: 'Personal Courier',
       price: 29000,
       formattedPrice: formatPrice('29000'),
-      durationInDays: 1
+      durationInDays: 1,
+      value: 'personal'
     }
   ],
   chosenShipment: {}

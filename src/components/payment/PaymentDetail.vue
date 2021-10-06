@@ -59,7 +59,8 @@ export default {
         payment: {}
       },
       eWalletData: {
-        saldo: 1500000
+        saldo: 1500000,
+        value: 'ewallet'
       }
     }
   },

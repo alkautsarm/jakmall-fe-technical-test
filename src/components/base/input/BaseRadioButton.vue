@@ -8,7 +8,7 @@
     "
   >
     <div class="form__inputDetailRadio">
-      <label class="form__inputLabelRadio">
+      <label class="form__inputLabelRadio" :for="radioValue.value">
         {{ radioLabel }}
       </label>
       <span>{{ radioDetail }}</span>
@@ -19,9 +19,10 @@
       :value="radioValue"
       type="radio"
       class="form__inputRadio"
+      :id="radioValue.value"
     >
     <img
-      v-if="radioModel === radioValue"
+      v-if="radioModel.value === radioValue.value"
       src="@/assets/icons/success.svg"
       alt="Chosen radio button icon"
       class="baseRadioButton__check"
