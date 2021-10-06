@@ -31,6 +31,7 @@ export default {
 .backButton
   display: flex
   align-items: center
+  width: fit-content
 
 .backButton__text
   opacity: 0.6
