@@ -88,4 +88,8 @@ export default {
 @media screen and (max-width: breakpoints-tablet)
   .paymentNav
     margin-bottom: -25px
+
+@media screen and (max-width: breakpoints-mobile-large)
+  .paymentNav
+    margin-bottom: 0px
 </style>

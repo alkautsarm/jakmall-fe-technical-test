@@ -311,4 +311,22 @@ export default {
 @media screen and (max-width: breakpoints-desktop)
   .deliveryDetail__form
     grid-column-gap: 1rem
+
+@media screen and (max-width: breakpoints-mobile-large)
+  .deliveryDetail__title
+    justify-content: flex-start
+    align-items: flex-start
+    margin-bottom: 1rem
+    flex-direction: column
+
+  .deliveryDetail__dropshippingLabel
+    margin-top: 2rem
+
+  .deliveryDetail__input--left
+    grid-column-start: 1
+    grid-column-end: 5
+
+  .deliveryDetail__input--right
+    grid-column-start: 1
+    grid-column-end: 5
 </style>

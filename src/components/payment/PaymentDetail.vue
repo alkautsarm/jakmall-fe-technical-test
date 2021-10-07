@@ -124,4 +124,16 @@ export default {
   grid-template-columns: 1fr 1fr 1fr 1fr
   grid-column-gap: 0.75rem
   grid-row-gap: 0.75rem
+
+@media screen and (max-width: breakpoints-tablet)
+  .paymentDetail__form
+    grid-template-columns: 1fr 1fr
+
+@media screen and (max-width: breakpoints-mobile-large)
+  .paymentDetail__form
+    grid-template-columns: 1fr
+
+@media screen and (max-width: breakpoints-mobile-large)
+  .paymentDetail__title
+    margin-bottom: 1.5rem
 </style>

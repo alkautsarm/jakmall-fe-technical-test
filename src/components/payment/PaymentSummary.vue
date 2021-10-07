@@ -208,5 +208,9 @@ export default {
     min-height: 0
 
   .paymentSummary__footer
-    margin-top: 2rem
+    margin-top: 3rem
+
+@media screen and (max-width: breakpoints-mobile-large)
+  .paymentSummary__footer
+    margin-top: 5rem
 </style>
