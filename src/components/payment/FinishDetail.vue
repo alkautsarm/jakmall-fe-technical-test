@@ -64,4 +64,8 @@ export default {
 
 .finishDetail__detail
   margin-bottom: 4rem
+
+@media screen and (max-width: breakpoints-tablet)
+  .finishDetail
+    justify-content: start
 </style>

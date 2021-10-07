@@ -30,7 +30,7 @@
     </div>
 
     <!-- Payment summary footer -->
-    <div>
+    <div class="paymentSummary__footer">
       <!-- Detail price -->
       <div>
         <div
@@ -200,4 +200,13 @@ export default {
 
 .paymentSummary__btn
   margin-top: 2rem
+
+@media screen and (max-width: breakpoints-tablet)
+  .paymentSummary
+    padding-left: 0
+    border-left: none
+    min-height: 0
+
+  .paymentSummary__footer
+    margin-top: 2rem
 </style>

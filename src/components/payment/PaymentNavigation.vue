@@ -84,4 +84,8 @@ export default {
 
 .paymentNav__arrow
   margin-left: 1.25rem
+
+@media screen and (max-width: breakpoints-tablet)
+  .paymentNav
+    margin-bottom: -25px
 </style>

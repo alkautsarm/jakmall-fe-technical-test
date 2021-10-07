@@ -60,4 +60,16 @@ export default {
 .mainContent__detail--right
   grid-column-start: 3
   grid-column-end: 4
+
+@media screen and (max-width: breakpoints-tablet)
+  .mainContent
+    grid-gap: 4rem
+
+  .mainContent__detail--left
+    grid-column-start: 1
+    grid-column-end: 4
+
+  .mainContent__detail--right
+    grid-column-start: 1
+    grid-column-end: 4
 </style>
