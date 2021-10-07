@@ -15,7 +15,7 @@
         </span>
         <br>
         <span>
-          Your order will be delivered today with GO-SEND
+          Your order will be delivered today with {{ chosenShipment.label }}
         </span>
       </div>
 
@@ -38,7 +38,8 @@ export default {
   },
   name: 'FinishDetail',
   computed: {
-    ...mapState('order', ['orderID'])
+    ...mapState('order', ['orderID']),
+    ...mapState('shipment', ['chosenShipment'])
   }
 }
 </script>
