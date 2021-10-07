@@ -85,13 +85,13 @@ export default {
       this.changeShipment(value)
       this.$v.chosenShipment.$touch()
 
-      this.changeShipmentSubmitStatus(!this.$v.$invalid)
+      this.changeShipmentSubmitStatus(!this.$v.chosenShipment.$invalid)
     },
     changeFormValuePayment (value) {
       this.changePayment(value)
       this.$v.chosenPayment.$touch()
 
-      this.changePaymentSubmitStatus(!this.$v.$invalid)
+      this.changePaymentSubmitStatus(!this.$v.chosenPayment.$invalid)
     },
     getErrorMessage (key, payload) {
       if (!payload) {
