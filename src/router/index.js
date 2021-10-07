@@ -5,6 +5,7 @@ import Home from '@/views/Home.vue'
 import CartDelivery from '@/views/cart/CartDelivery.vue'
 import CartPayment from '@/views/cart/CartPayment.vue'
 import CartFinish from '@/views/cart/CartFinish.vue'
+import PageNotFound from '@/views/PageNotFound'
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,11 @@ const routes = [
     path: '/cart/finish',
     name: 'CartFinish',
     component: CartFinish
+  },
+  {
+    path: '*',
+    name: 'PageNotFound',
+    component: PageNotFound
   }
 ]
 
