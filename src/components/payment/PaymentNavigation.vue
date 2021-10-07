@@ -92,4 +92,18 @@ export default {
 @media screen and (max-width: breakpoints-mobile-large)
   .paymentNav
     margin-bottom: 0px
+
+@media screen and (max-width: breakpoints-mobile)
+  .paymentNav__steps
+    font-size: 0.8rem
+    padding: 1.25rem 0rem
+
+  .paymentNav__item:not(:last-child)
+    margin-right: 0.5rem
+
+  .paymentNav__num
+    margin-right: 0.25rem
+
+  .paymentNav__arrow
+    margin-left: 0.5rem
 </style>
