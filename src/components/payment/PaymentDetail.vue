@@ -37,10 +37,11 @@
         v-for="(payment, idx) in paymentChoices"
         :key="idx"
         :radio-label="payment.label"
-        :radio-detail="`${payment.formattedPrice} left`"
+        :radio-detail="`${payment.formattedSaldo} left`"
         :radio-model="chosenPayment"
         :radio-value="payment"
         form-key="payment"
+        :label-only="payment.value !== 'ewallet'"
         @updateValue="changeFormValuePayment"
       ></base-radio-button>
     </div>

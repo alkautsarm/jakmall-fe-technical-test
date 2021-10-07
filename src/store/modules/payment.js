@@ -5,9 +5,21 @@ const getDefaultPaymentState = () => {
     paymentChoices: [
       {
         label: 'e-Wallet',
-        price: 1500000,
-        formattedPrice: formatPrice('1500000'),
+        saldo: 1500000,
+        formattedSaldo: formatPrice('1500000'),
         value: 'ewallet'
+      },
+      {
+        label: 'Bank Transfer',
+        saldo: '',
+        formattedSaldo: '',
+        value: 'bank'
+      },
+      {
+        label: 'Virtual Account',
+        saldo: '',
+        formattedSaldo: '',
+        value: 'va'
       }
     ],
     chosenPayment: {},

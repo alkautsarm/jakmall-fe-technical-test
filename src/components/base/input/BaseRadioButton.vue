@@ -8,10 +8,10 @@
     "
   >
     <div class="form__inputDetailRadio">
-      <label class="form__inputLabelRadio" :for="radioValue.value">
+      <label :class="labelOnly ? 'form__inputLabelRadio--labelOnly' : 'form__inputLabelRadio'" :for="radioValue.value">
         {{ radioLabel }}
       </label>
-      <span>{{ radioDetail }}</span>
+      <span v-if="!labelOnly">{{ radioDetail }}</span>
     </div>
 
     <input
@@ -53,6 +53,10 @@ export default {
     formKey: {
       type: String,
       required: true
+    },
+    labelOnly: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
