@@ -79,13 +79,13 @@
         :disabled="
           $route.name === 'CartDelivery'
             ? !submitStatus :
-            !submitStatus && !shipmentSubmitStatus && !paymentSubmitStatus
+            !submitStatus || !shipmentSubmitStatus || !paymentSubmitStatus
         "
       >
         {{
           $route.name === 'CartDelivery'
             ? 'Continue to Payment'
-            : `Pay with ${ chosenPayment.label }`
+            : `Pay with ${ chosenPayment.label ? chosenPayment.label : '' }`
         }}
       </button>
     </div>
