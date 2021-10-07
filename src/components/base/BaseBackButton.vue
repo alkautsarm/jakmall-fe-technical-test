@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   name: 'BaseBackButton',
   props: {
@@ -28,7 +29,22 @@ export default {
       default: false
     }
   },
+  destroyed () {
+    if (this.isClearLocalStorage) {
+      this.cartResetState()
+      this.paymentResetState()
+      this.shipmentResetState()
+      this.deliveryResetState()
+      this.orderResetState()
+    }
+  },
   methods: {
+    ...mapMutations('cart', { cartResetState: 'resetState' }),
+    ...mapMutations('payment', { paymentResetState: 'resetState' }),
+    ...mapMutations('shipment', { shipmentResetState: 'resetState' }),
+    ...mapMutations('delivery', { deliveryResetState: 'resetState' }),
+    ...mapMutations('order', { orderResetState: 'resetState' }),
+
     moveNavigation () {
       if (this.isClearLocalStorage) {
         window.localStorage.removeItem('vuex')

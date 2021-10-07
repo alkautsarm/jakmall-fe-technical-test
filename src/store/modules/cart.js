@@ -1,10 +1,13 @@
 import formatPrice from '@/utils/priceFormatting.js'
 
-const state = () => ({
-  totalItems: 10,
-  totalCogs: 500000,
-  paymentChoices: []
-})
+const getDefaultCartState = () => {
+  return {
+    totalItems: 10,
+    totalCogs: 500000
+  }
+}
+
+const state = getDefaultCartState()
 
 const getters = {
   formattedTotalItems: state => {
@@ -17,7 +20,11 @@ const getters = {
 
 const actions = {}
 
-const mutations = {}
+const mutations = {
+  resetState (state) {
+    Object.assign(state, getDefaultCartState())
+  }
+}
 
 export default {
   namespaced: true,

@@ -1,17 +1,21 @@
 import formatPrice from '@/utils/priceFormatting.js'
 
-const state = () => ({
-  dropshippingFee: 5900,
-  deliveryData: {
-    dropshippingStatus: false,
-    email: '',
-    dropshipperName: '',
-    phoneNumber: '',
-    dropshipperPhoneNumber: '',
-    deliveryAddress: ''
-  },
-  submitStatus: false
-})
+const getDefaultDeliveryState = () => {
+  return {
+    dropshippingFee: 5900,
+    deliveryData: {
+      dropshippingStatus: false,
+      email: '',
+      dropshipperName: '',
+      phoneNumber: '',
+      dropshipperPhoneNumber: '',
+      deliveryAddress: ''
+    },
+    submitStatus: false
+  }
+}
+
+const state = getDefaultDeliveryState()
 
 const getters = {
   formattedDropshippingFee: state => {
@@ -27,6 +31,9 @@ const mutations = {
   },
   changeSubmitStatus (state, payload) {
     state.submitStatus = payload
+  },
+  resetState (state) {
+    Object.assign(state, getDefaultDeliveryState())
   }
 }
 

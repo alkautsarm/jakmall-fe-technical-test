@@ -1,17 +1,21 @@
 import formatPrice from '@/utils/priceFormatting.js'
 
-const state = () => ({
-  paymentChoices: [
-    {
-      label: 'e-Wallet',
-      price: 1500000,
-      formattedPrice: formatPrice('1500000'),
-      value: 'ewallet'
-    }
-  ],
-  chosenPayment: {},
-  paymentSubmitStatus: false
-})
+const getDefaultPaymentState = () => {
+  return {
+    paymentChoices: [
+      {
+        label: 'e-Wallet',
+        price: 1500000,
+        formattedPrice: formatPrice('1500000'),
+        value: 'ewallet'
+      }
+    ],
+    chosenPayment: {},
+    paymentSubmitStatus: false
+  }
+}
+
+const state = getDefaultPaymentState()
 
 const getters = {}
 
@@ -23,6 +27,9 @@ const mutations = {
   },
   changePaymentSubmitStatus (state, payload) {
     state.paymentSubmitStatus = payload
+  },
+  resetState (state) {
+    Object.assign(state, getDefaultPaymentState())
   }
 }
 
