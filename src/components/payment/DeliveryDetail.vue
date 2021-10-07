@@ -307,4 +307,8 @@ export default {
 .deliveryDetail__input--right
   grid-column-start: 3
   grid-column-end: 5
+
+@media screen and (max-width: breakpoints-desktop)
+  .deliveryDetail__form
+    grid-column-gap: 1rem
 </style>
